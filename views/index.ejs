@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="bulma.min.css">
+		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"> </script>
+	</head>
+	<body>
+    <ul>
+      <% allRestaurants.forEach(restaurant =>  { %>
+        <li>
+          <p>name: <span><%= restaurant.name %></span></p>
+          <p><span><%= restaurant.description %></span></p>
+          <button><a href="/reviews/show/<%= restaurant.restaurant_id %>">See Reviews</a></button>
+          <form action="/restaurant/delete" method="post">
+            <input type="hidden" name="id" value="<%= restaurant.restaurant_id %>" /> 
+            <input type="submit" value="delete" /> 
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+    <form method="post" action="/restaurant/add">
+      <input type="text" name="name" placeholder="name">
+      <input type="text" name="description" placeholder="description">
+      <input type="submit" value="add">
+    </form>
+	</body>
+</html>
